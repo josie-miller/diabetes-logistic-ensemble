@@ -1,0 +1,72 @@
+Here is the first output:
+    Bagging Method Accuracy: 0.7597402597402597
+    Decision Tree Accuracy: 0.7467532467532467
+    Random Forests Accuracy: 0.7662337662337663
+    Out-of-Bag Score: 0.7654723127035831
+    AdaBoost Accuracy: 0.7467532467532467
+They are all performing at very similar accuracies. However, it is clear that the 
+bagging method and random forest are doing uch better than the adaboost and standard decision 
+tree models. This makes sense as the decision tree is less complex then the other models.
+3. In the last part of the code, lines 111-139, I print the accuracy and the ROC curve for depths 2, 3, 4, 5.
+Here is the text output:
+    Random Forest Accuracy with max_depth=2: 0.7857142857142857
+    Random Forest Accuracy with max_depth=3: 0.7792207792207793
+    Random Forest Accuracy with max_depth=4: 0.7857142857142857
+    Random Forest Accuracy with max_depth=5: 0.7727272727272727
+
+In terms of accuracy score, max depth 4 and 2 did the best, while 3 lagged a bit behind, and
+5 being even lower. This shows that max depth 4 is the cut off, and that it is best to stay under it.
+As for the ROC curves, the AUC for max depth 5 and 4 (0.83 for both) were a bit higher than max depth 3 and 2 (0.82 for both).
+So, overall, the max depth value that optimizes performance is max depth 4, which as the highest ROC AUC and accuracy. 
+
+4. Adaboost classifier was tested with different learning rates, [0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 1.5, 2.0].
+Below are the outputs for each learning rate for reference:
+    AdaBoost Accuracy with learning_rate=0.1: 0.7662337662337663
+    AdaBoost Accuracy with learning_rate=0.2: 0.7727272727272727
+    AdaBoost Accuracy with learning_rate=0.3: 0.7532467532467533
+    AdaBoost Accuracy with learning_rate=0.4: 0.7467532467532467
+    AdaBoost Accuracy with learning_rate=0.5: 0.7467532467532467
+    AdaBoost Accuracy with learning_rate=1.0: 0.7467532467532467
+    AdaBoost Accuracy with learning_rate=1.5: 0.6818181818181818
+    AdaBoost Accuracy with learning_rate=2.0: 0.2597402597402597
+The accuracy scores clearly vary heavily along the learning rates. 
+At lower rates incl. 0.1 and 0.2, the accuracy is relatively higher, at approx. 77.27% for a learning rate of 0.2. 
+but, as the learning rate increases, the accuracy starts to lower, dropping to 25.97% at a learning rate of 2.0. 
+The behavior suggests that the optimal learning rate for adaboost model on the given dataset lies within the lower range, 
+around 0.1 to 0.2. Higher learning rates seem to lead to overfitting or )instability in the model, resulting in significantly reduced accuracy. 
+
+5. The code 159-211's output:
+    Bagging Method Cross-Validation Scores: [0.75324675 0.72727273 0.75974026 0.82352941 0.75163399]
+    Bagging Method Mean Cross-Validation Score: 0.7630846277905101
+    Decision Tree Cross-Validation Scores: [0.71428571 0.66233766 0.66883117 0.81045752 0.74509804]
+    Decision Tree Mean Cross-Validation Score: 0.7202020202020203
+    Random Forests Cross-Validation Scores: [0.77272727 0.73376623 0.75324675 0.81699346 0.75816993]
+    Random Forests Mean Cross-Validation Score: 0.7669807316866141
+    Out-of-Bag Score: 0.7669270833333334
+    AdaBoost Cross-Validation Scores: [0.74025974 0.72727273 0.77272727 0.81045752 0.75163399]
+    AdaBoost Mean Cross-Validation Score: 0.7604702487055428
+    
+    For clarity, I'll put the four models' original scores and their cross val score:
+        Bagging Method Accuracy: 0.7597402597402597
+            Bagging Method Mean Cross-Validation Score: 0.7630846277905101
+        Decision Tree Accuracy: 0.7467532467532467
+            Decision Tree Mean Cross-Validation Score: 0.7202020202020203
+        Random Forests Accuracy: 0.7662337662337663
+            Random Forests Mean Cross-Validation Score: 0.7669807316866141
+        AdaBoost Accuracy: 0.7467532467532467
+            AdaBoost Mean Cross-Validation Score: 0.7604702487055428
+            
+to reiterate, the output shows the accuracy scores for every model and the averaged crossval score across five folds. 
+the bagging method and random forest methods demonstrate higher accuracy scores compared to the decision tree and AdaBoost classifiers, 
+both in the original split and cross-validation. The Bagging method and Random Forests method use ensemble techniques as, for lack of a better word, leverage, 
+which involve combining multiple base models, in our case, decison trees. These techniques often lead to improved generalization and better performance on unseen data, 
+as shown in the cross-val scores.
+
+The Decision Tree classifier, on the other hand, shows a slightly lower accuracy score and mean cross-validation score. 
+Decision trees can be prone to overfitting, capturing the 'noise' in the training data, and may not generalize well in new data. 
+Cross-validation provides a better assessment by evaluating the model on different subparts of the data, showing the variability in performance. 
+The AdaBoost classifier, while having a similar accuracy score to the Decision Tree, have a higher mean cv score, thus showing a more stable and reliable performance across dif. folds.
+The differences between the original accuracy scores and mean cv scores can be attributed to the variance introduced by the specific data split in the og train test split. 
+Cross-val provides a better evaluation by avg. the performance over *multiple* data splits, leading to a more reliable estimate of the model's general performance. 
+Overall, the ensemble methods, Bagging and Random Forests, demonstrate better consistency and robustness across different parts of datasets, 
+highlighting their effectiveness in handling different patterns within the dataset.
